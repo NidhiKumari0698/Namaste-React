@@ -1,3 +1,9 @@
 Episode-02_Igniting-our-App/node_modules
 Episode-02_Igniting-our-App/dist
 Episode-02_Igniting-our-App/.parcel-cache
+/node_modules
+.parcel-cache/
+dist/
+Episode-03_Laying-the-foundation/dist
+Episode-03_Laying-the-foundation/.parcel-cache
+Episode-03_Laying-the-foundation/node_modules
