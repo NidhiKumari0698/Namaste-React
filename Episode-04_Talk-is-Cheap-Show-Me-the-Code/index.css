@@ -1,15 +1,16 @@
-.header{
+.header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     border: 1px solid black;
     padding: 0px 20px;
 }
-.logo-container img{
+
+.logo-container img {
     width: 100px;
 }
 
-.nav-items ul{
+.nav-items ul {
     display: flex;
     list-style: none;
     column-gap: 2rem;
@@ -17,33 +18,68 @@
 }
 
 .res-card {
-  width: 200px;
-  padding: 10px;
+    width: 200px;
+    padding: 10px;
 }
 
-.res-card:hover{
+.res-card:hover {
     border: 1px solid black;
     cursor: pointer;
 }
 
-.res-card img{
+.res-card img {
     width: 100%;
     height: 135px;
 }
 
-.body .search{
+.body .search {
     padding: 10px;
 }
 
-.res-container{
+.res-container {
     display: flex;
     column-gap: 2rem;
     row-gap: 2rem;
     flex-wrap: wrap;
 }
 
-.body .filter .filter-btn{
+.body .filter .filter-btn {
     cursor: pointer;
     height: 30px;
-    margin: 15px;
+}
+
+.shimmer-container {
+    column-gap: 4rem;
+    display: flex;
+    row-gap: 4rem;
+    justify-content: space-around;
+    margin: 10px;
+    flex-wrap: wrap;
+}
+
+.shimmer-card {
+    background-color: #f0f0f0;
+    width: 200px;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.login-btn {
+    padding: 5px 20px;
+}
+
+.body .filter {
+    display: flex;
+    column-gap: 1rem;
+    margin: 10px;
+    justify-content: center;
+    align-items: center;
+}
+
+.user-card {
+    padding: 5px;
+    border: 1px solid black;
 }
