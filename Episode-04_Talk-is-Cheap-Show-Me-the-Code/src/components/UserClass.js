@@ -32,10 +32,10 @@ class UserClass extends React.Component {
 
   componentDidMount() {
     console.log(this.props.name + "componentDidMount (UserClass Class)");
-    this.intervalId = setInterval(() => {
-      console.log("SETINTERVAL");
-    }, 1000);
-    console.log("this.intervalId----------->", this.intervalId);
+    // this.intervalId = setInterval(() => {
+    //   console.log("SETINTERVAL");
+    // }, 1000);
+    // console.log("this.intervalId----------->", this.intervalId);
 
     this.fetchUserData();
   }

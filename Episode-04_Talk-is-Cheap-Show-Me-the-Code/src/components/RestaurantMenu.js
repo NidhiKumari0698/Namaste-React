@@ -1,45 +1,49 @@
-import { useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
 import { useParams } from "react-router-dom";
-import { MENU_API } from "../utils/constant";
+import useRestaurantMenu from "../utils/useRestaurantMenu";
+import RestaurantCategory from "./RestaurantCategory";
+import { useState } from "react";
 
 const RestaurantMenu = () => {
-  const [resInfo, setResInfo] = useState(null);
-  const [resPersonalInfo, setResPersonalInfo] = useState(null);
+  const [showIndex, setShowIndex] = useState(-1);
   const { resId } = useParams();
-  console.log("resId------------>", resId);
+  const dataSet = useRestaurantMenu(resId);
+  const regularCards =
+    dataSet?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR.cards;
 
-  useEffect(() => {
-    fetchMenu();
-  }, []);
+  const categories = regularCards?.filter(
+    (currCard) =>
+      currCard.card.card[`@type`] ===
+      "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory"
+  );
 
-  const fetchMenu = async () => {
-    const response = await fetch(`${MENU_API}${resId}`);
-    const resultJson = await response.json();
-    console.log("resultJson::", resultJson);
-    setResInfo(
-      resultJson?.data?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2]
-        ?.card?.card?.itemCards
-    );
-    setResPersonalInfo(resultJson?.data?.cards[2]?.card.card.info);
-  };
+  const resInfo =
+    dataSet?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2]?.card?.card
+      ?.itemCards;
+  const resPersonalInfo = dataSet?.cards[2]?.card.card.info;
 
-  console.log("resInfo-------------->", resInfo);
-  console.log("resPersonalInfo-------------->", resPersonalInfo);
-
-  return resInfo === null ? (
+  return resInfo === null || !resInfo ? (
     <Shimmer />
   ) : (
-    <div className="restaurant-menu">
-      <h1>{resPersonalInfo.name}</h1>
-      <h2>{resPersonalInfo.cuisines.join(" , ")}</h2>
-      <h3>{resPersonalInfo.costForTwoMessage}</h3>
-      <h3>Menu</h3>
-      <ul>
-        {resInfo.map((data, index) => (
-          <li>{data.card.info.name}</li>
-        ))}
-      </ul>
+    <div className="text-center">
+      <h1 className="font-bold my-2 text-2xl">{resPersonalInfo?.name}</h1>
+      <p className="font-bold text-lg">
+        {resPersonalInfo?.cuisines?.join(" , ")} -{" "}
+        {resPersonalInfo?.costForTwoMessage}
+      </p>
+      {categories.map((category, index) => (
+        <RestaurantCategory
+          data={category?.card?.card}
+          showItem={index === showIndex ? true : false}
+          setShowIndex={() => {
+            if (showIndex === index) {
+              setShowIndex(-1);
+            } else {
+              setShowIndex(index);
+            }
+          }}
+        />
+      ))}
     </div>
   );
 };

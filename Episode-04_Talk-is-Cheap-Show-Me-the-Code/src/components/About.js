@@ -1,6 +1,7 @@
 import User from "./User";
 import UserClass from "./UserClass";
 import { Component } from "react";
+import UserContext from "../utils/UserContext";
 
 class About extends Component {
   constructor(props) {
@@ -31,6 +32,14 @@ class About extends Component {
         <h1>About Us Page!!</h1>
         {/* <h2>count1: {count1}</h2>
         <button onClick={increment.bind(this)}>+</button> */}
+        <div>
+          LoggedIn User
+          <UserContext.Consumer>
+            {({ loggedInUser }) => (
+              <h1 className="font-bold">{loggedInUser}</h1>
+            )}
+          </UserContext.Consumer>
+        </div>
         <UserClass
           name={"First "}
           location="Patna (Class)"
